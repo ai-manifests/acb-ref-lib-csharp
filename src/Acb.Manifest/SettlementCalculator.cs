@@ -94,26 +94,38 @@ public static class SettlementCalculator
         if (participants.Count == 0) return ImmutableList<EpistemicDistribution>.Empty;
 
         var perBonus = pool / 4.0;
+        var equalShare = perBonus / participants.Count;
 
         // Base share — equal across all participants
-        var baseShare = perBonus / participants.Count;
+        var baseShare = equalShare;
 
-        // Falsification bonus — proportional to acknowledged falsifications
+        // Falsification bonus — proportional to acknowledged falsifications.
+        // If nobody acknowledged any falsification, the pool distributes
+        // equally so its share is not lost.
         var totalFalsifications = participants.Sum(c => c.AcknowledgedFalsifications);
         double FalsificationFor(ParticipantContribution c) =>
-            totalFalsifications == 0 ? 0 : perBonus * c.AcknowledgedFalsifications / totalFalsifications;
+            totalFalsifications == 0
+                ? equalShare
+                : perBonus * c.AcknowledgedFalsifications / totalFalsifications;
 
-        // Load-bearing bonus — equal across load-bearing agents
+        // Load-bearing bonus — equal across load-bearing agents. If nobody
+        // is load-bearing, the pool distributes equally across all
+        // participants.
         var loadBearingCount = participants.Count(c => c.LoadBearing);
-        double LoadBearingFor(ParticipantContribution c) =>
-            (loadBearingCount == 0 || !c.LoadBearing) ? 0 : perBonus / loadBearingCount;
+        double LoadBearingFor(ParticipantContribution c)
+        {
+            if (loadBearingCount == 0) return equalShare;
+            return c.LoadBearing ? perBonus / loadBearingCount : 0;
+        }
 
-        // Outcome correctness bonus — inverse Brier delta, normalized
+        // Outcome correctness bonus — inverse Brier delta, normalized. If
+        // no outcomes are reported, the pool distributes equally.
         var withOutcomes = participants.Where(c => c.OutcomeBrierDelta.HasValue).ToList();
         var totalInverse = withOutcomes.Sum(c => 1.0 - c.OutcomeBrierDelta!.Value);
         double OutcomeFor(ParticipantContribution c)
         {
-            if (!c.OutcomeBrierDelta.HasValue || totalInverse == 0) return 0;
+            if (withOutcomes.Count == 0 || totalInverse == 0) return equalShare;
+            if (!c.OutcomeBrierDelta.HasValue) return 0;
             return perBonus * (1.0 - c.OutcomeBrierDelta.Value) / totalInverse;
         }
 

@@ -278,6 +278,49 @@ public class PrMergeBudgetTests
     }
 
     [Fact]
+    public void Empty_bonus_pools_distribute_equally()
+    {
+        // Three participants, no falsifications, no load-bearing, no outcome.
+        // Three of the four bonus categories have no eligible recipients and
+        // would silently lose 75% of the draw without the empty-pool rule
+        // (spec §6.2).
+        var budget = MakeBudget();
+        const double drawTotal = 150;
+
+        var contributions = new List<ParticipantContribution>
+        {
+            new(TestRunner, true, 0, false, null, false),
+            new(Scanner, true, 0, false, null, false),
+            new(Linter, true, 0, false, null, false),
+        };
+
+        var record = SettlementCalculator.BuildSettlementRecord(new SettlementInputs(
+            EntryId: "adj_test_empty_pool",
+            DeliberationId: Dlb,
+            Timestamp: DateTimeOffset.Parse("2026-04-14T09:30:00Z"),
+            PriorEntryHash: null,
+            BudgetId: Bgt,
+            AmountTotal: budget.AmountTotal,
+            DrawTotal: drawTotal,
+            Settlement: budget.Settlement,
+            Contributions: contributions,
+            SubstrateReports: new List<SubstrateReport>(),
+            HabitDiscountApplied: 0,
+            UnlockTriggered: false,
+            DisagreementMagnitudeInitial: 0.05,
+            OutcomeReferenced: null,
+            Signature: "ed25519:test"
+        ));
+
+        var subSum = record.SubstrateDistributions.Sum(d => d.Amount);
+        var epiSum = record.EpistemicDistributions.Sum(d => d.Amount);
+        Assert.True(Math.Abs(subSum + epiSum - drawTotal) < 0.5);
+
+        var amounts = record.EpistemicDistributions.Select(d => d.Amount).ToList();
+        Assert.True(amounts.Max() - amounts.Min() < 0.5);
+    }
+
+    [Fact]
     public void Cancellation_locks_budget()
     {
         var store = new InMemoryBudgetStore();
