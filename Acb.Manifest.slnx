@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Acb.Manifest/Acb.Manifest.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Acb.Manifest.Tests/Acb.Manifest.Tests.csproj" />
+  </Folder>
+</Solution>
