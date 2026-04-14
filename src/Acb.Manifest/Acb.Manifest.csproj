@@ -12,7 +12,7 @@
     <Description>C# reference implementation of the Agent Cognitive Budget (ACB) protocol specification.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://adp-manifest.dev</PackageProjectUrl>
-    <RepositoryUrl>https://git.marketally.com/ai-manifests/acb-ref-lib</RepositoryUrl>
+    <RepositoryUrl>https://git.marketally.com/ai-manifests/acb-ref-lib-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>

@@ -58,8 +58,8 @@ The protocol enforces a **cheap-routine** / **expensive-routine** pricing model 
 Clone the repository and reference the project:
 
 ```bash
-git clone https://git.marketally.com/ai-manifests/acb-ref-lib.git
-cd acb-ref-lib
+git clone https://git.marketally.com/ai-manifests/acb-ref-lib-csharp.git
+cd acb-ref-lib-csharp
 dotnet build
 ```
 
