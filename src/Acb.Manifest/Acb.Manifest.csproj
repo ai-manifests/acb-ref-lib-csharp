@@ -7,8 +7,8 @@
     <PackageId>Acb.Manifest</PackageId>
     <Version>0.1.0</Version>
     <Authors>David H. Friedel Jr.</Authors>
-    <Company>MarketAlly</Company>
-    <Copyright>Copyright 2026 David H. Friedel Jr. (MarketAlly)</Copyright>
+    <Company>MarketAlly Pte Ltd</Company>
+    <Copyright>Copyright 2026 MarketAlly Pte Ltd</Copyright>
     <Description>C# reference implementation of the Agent Cognitive Budget (ACB) protocol specification.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://adp-manifest.dev</PackageProjectUrl>
