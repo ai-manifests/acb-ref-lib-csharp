@@ -1,5 +1,10 @@
 # Acb.Manifest
 
+[![NuGet](https://img.shields.io/nuget/v/Acb.Manifest.svg?label=NuGet)](https://www.nuget.org/packages/Acb.Manifest)
+[![Downloads](https://img.shields.io/nuget/dt/Acb.Manifest.svg)](https://www.nuget.org/packages/Acb.Manifest)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Spec](https://img.shields.io/badge/spec-acb--manifest.dev-informational)](https://acb-manifest.dev)
+
 A .NET 10 implementation of the **Agent Cognitive Budget (ACB)** protocol — the metabolic-budget layer for deliberative multi-agent systems. ACB provides append-only journal entries, pricing models, habit-memory discounts, and settlement distribution that mirror the brain's resource allocation for routine vs. contested decisions.
 
 ## Table of Contents
