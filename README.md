@@ -1,6 +1,6 @@
 # Acb.Manifest
 
-A .NET 8 implementation of the **Agent Cognitive Budget (ACB)** protocol — the metabolic-budget layer for deliberative multi-agent systems. ACB provides append-only journal entries, pricing models, habit-memory discounts, and settlement distribution that mirror the brain's resource allocation for routine vs. contested decisions.
+A .NET 10 implementation of the **Agent Cognitive Budget (ACB)** protocol — the metabolic-budget layer for deliberative multi-agent systems. ACB provides append-only journal entries, pricing models, habit-memory discounts, and settlement distribution that mirror the brain's resource allocation for routine vs. contested decisions.
 
 ## Table of Contents
 
@@ -51,14 +51,14 @@ The protocol enforces a **cheap-routine** / **expensive-routine** pricing model 
 
 ### Prerequisites
 
-- .NET 8.0 SDK or later
+- .NET 10.0 SDK
 
 ### Add to Your Project
 
 Clone the repository and reference the project:
 
 ```bash
-git clone https://git.marketally.com/ai-manifests/acb-ref-lib-csharp.git
+git clone https://github.com/ai-manifests/acb-ref-lib-csharp.git
 cd acb-ref-lib-csharp
 dotnet build
 ```
